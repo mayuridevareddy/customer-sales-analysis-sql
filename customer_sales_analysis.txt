@@ -1,0 +1,145 @@
+/* =====================================================
+   CUSTOMER SALES ANALYSIS DATABASE
+   Author: Devareddy Mayuri
+   Description: SQL project for analyzing dealer orders,
+   products, and revenue using relational tables.
+   ===================================================== */
+
+--------------------------------------------------------
+-- CREATE DATABASE
+--------------------------------------------------------
+
+CREATE DATABASE customer_churn;
+USE customer_churn;
+
+--------------------------------------------------------
+-- TABLE 1: DEALERS CUSTOMER
+--------------------------------------------------------
+
+CREATE TABLE dealers_customer (
+    delno INT PRIMARY KEY,
+    cname VARCHAR(20),
+    city VARCHAR(30),
+    shop_name VARCHAR(40)
+);
+
+--------------------------------------------------------
+-- INSERT DATA INTO DEALERS CUSTOMER
+--------------------------------------------------------
+
+INSERT INTO dealers_customer VALUES
+(1001, 'Ravi', 'Mumbai', 'Amul Ice Creams'),
+(1002, 'Sneha', 'Chennai', 'Kwality Walls'),
+(1003, 'Arjun', 'Delhi', 'Naturals Ice Cream'),
+(1004, 'Priyanka', 'Bengaluru', 'Havmor'),
+(1005, 'Vikram', 'Kolkata', 'Kwality Walls'),
+(1006, 'Anita', 'Pune', 'Cream Bell'),
+(1007, 'Rahul', 'Hyderabad', 'Vadilal'),
+(1008, 'Kiran', 'Chennai', 'Mother Dairy'),
+(1009, 'Meena', 'Jaipur', 'London Dairy'),
+(1010, 'Rohith', 'Lucknow', 'Dairy Day Ice Creams'),
+(1011, 'Teena', 'Chennai', 'Arun Ice Creams'),
+(1012, 'Ajay', 'Mumbai', 'Ben & Jerrys'),
+(1013, 'Sonal', 'Kolkata', 'Mother Dairy'),
+(1014, 'Nishal', 'Delhi', 'Haagen-Dazs'),
+(1015, 'Rajesh', 'Bengaluru', 'Dinshaws Ice Creams'),
+(1016, 'Harini', 'Hyderabad', 'Chilly Bliss'),
+(1017, 'Manoj', 'Pune', 'Arun Ice Creams'),
+(1018, 'Poojitha', 'Lucknow', 'Scoop Station'),
+(1019, 'Sandeep', 'Visakhapatnam', 'Ice Dream Cafe'),
+(1020, 'Aravindh', 'Bhopal', 'Polar Swirl'),
+(1021, 'Divya', 'Patna', 'Snowberry Creams'),
+(1022, 'Nehitha', 'Kolkata', 'The Frozen Spoon'),
+(1023, 'Ashok', 'Pune', 'Cone Kingdom'),
+(1024, 'Komali', 'Varanasi', 'Creamy Clouds'),
+(1025, 'Ramesh', 'Coimbatore', 'Arun Ice Creams');
+
+--------------------------------------------------------
+-- TABLE 2: PRODUCT
+--------------------------------------------------------
+
+CREATE TABLE product (
+    pno INT PRIMARY KEY,
+    pname VARCHAR(30),
+    price DECIMAL(10,2),
+    ptype VARCHAR(20)
+);
+
+--------------------------------------------------------
+-- INSERT DATA INTO PRODUCT
+--------------------------------------------------------
+
+INSERT INTO product VALUES
+(2001,'Vanilla',60.00,'Cup'),
+(2002,'Chocolate',90.00,'Cone'),
+(2003,'Strawberry',50.00,'Cup'),
+(2004,'Mango',55.00,'Box'),
+(2005,'Butterscotch',75.00,'Cone'),
+(2006,'Kesar Pista',45.00,'Box'),
+(2007,'Black Currant',92.00,'Cup'),
+(2008,'Orange',65.00,'Box'),
+(2009,'Casatta',62.00,'Cone'),
+(2010,'Vanilla',60.00,'Cup'),
+(2011,'Caramel',100.00,'Box'),
+(2012,'Blueberry',110.00,'Cone'),
+(2013,'Strawberry',50.00,'Box'),
+(2014,'Pineapple',40.00,'Cup'),
+(2015,'Chocolate',90.00,'Cone'),
+(2016,'Mango',55.00,'Box'),
+(2017,'Pista',95.00,'Box'),
+(2018,'Choco Brownie',78.00,'Cup'),
+(2019,'Black Currant',92.00,'Box'),
+(2020,'Butterscotch',75.00,'Cone'),
+(2021,'Kesar Pista',45.00,'Cone'),
+(2022,'Caramel',100.00,'Cup'),
+(2023,'Blueberry',110.00,'Box'),
+(2024,'Strawberry',50.00,'Cup'),
+(2025,'Orange',65.00,'Cone');
+
+--------------------------------------------------------
+-- TABLE 3: ORDERS
+--------------------------------------------------------
+
+CREATE TABLE orders (
+    onum INT PRIMARY KEY,
+    oday DATE,
+    delno INT,
+    pno INT,
+    no_of_porders INT,
+    tamount DECIMAL(12,2),
+    del_date DATE,
+    FOREIGN KEY (delno) REFERENCES dealers_customer(delno),
+    FOREIGN KEY (pno) REFERENCES product(pno)
+);
+
+--------------------------------------------------------
+-- INSERT DATA INTO ORDERS
+--------------------------------------------------------
+
+INSERT INTO orders VALUES
+(3001,'2025-05-05',1001,2005,10,580.00,'2025-05-10'),
+(3002,'2025-04-07',1002,2010,15,865.00,'2025-04-12'),
+(3003,'2025-02-08',1003,2012,8,560.00,'2025-02-15'),
+(3004,'2025-01-10',1004,2003,12,676.00,'2025-01-18'),
+(3005,'2025-02-12',1005,2008,20,1300.00,'2025-02-20'),
+(3006,'2025-03-13',1006,2007,10,540.00,'2025-03-19'),
+(3007,'2025-04-14',1007,2015,15,980.00,'2025-04-21'),
+(3008,'2025-01-16',1008,2020,18,566.00,'2025-01-23'),
+(3009,'2025-05-17',1009,2009,25,1580.00,'2025-05-27'),
+(3010,'2025-01-19',1010,2001,10,950.00,'2025-01-26'),
+(3011,'2025-05-01',1011,2011,14,922.00,'2025-05-08'),
+(3012,'2025-06-03',1012,2013,20,1780.00,'2025-06-10'),
+(3013,'2025-06-05',1013,2018,10,990.00,'2025-06-12'),
+(3014,'2025-04-06',1014,2019,16,1580.00,'2025-04-15'),
+(3015,'2025-03-08',1015,2021,12,679.00,'2025-03-17'),
+(3016,'2025-03-09',1016,2024,20,5570.00,'2025-03-19'),
+(3017,'2025-02-10',1017,2025,18,1672.00,'2025-02-22'),
+(3018,'2025-02-12',1018,2024,10,990.00,'2025-02-23'),
+(3022,'2025-04-02',1022,2020,12,790.00,'2025-05-09'),
+(3023,'2025-06-03',1023,2001,8,546.00,'2025-06-10'),
+(3024,'2025-01-05',1024,2002,10,230.00,'2025-01-12'),
+(3025,'2025-01-06',1025,2003,15,1170.00,'2025-01-15');
+
+--------------------------------------------------------
+-- END OF DATASET
+--------------------------------------------------------
