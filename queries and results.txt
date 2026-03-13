@@ -1,0 +1,112 @@
+--------------------------------------------------------
+1. View Product Names and Prices
+--------------------------------------------------------
+
+Query:
+
+SELECT pname, price FROM product;
+
+Output:
+
++---------------+--------+
+| pname         | price  |
++---------------+--------+
+| Vanilla       | 60.00  |
+| Chocolate     | 90.00  |
+| Strawberry    | 50.00  |
+| Mango         | 55.00  |
+| Butterscotch  | 75.00  |
+| Kesar Pista   | 45.00  |
++---------------+--------+
+
+--------------------------------------------------------
+2. Total Revenue Generated
+--------------------------------------------------------
+
+Query:
+
+SELECT SUM(tamount) FROM orders;
+
+Output:
+
++--------------+
+| sum(tamount) |
++--------------+
+|        28680 |
++--------------+
+
+--------------------------------------------------------
+3. Average Product Price
+--------------------------------------------------------
+
+Query:
+
+SELECT AVG(price) FROM product;
+
+Output:
+
++------------+
+| avg(price) |
++------------+
+|  72.36     |
++------------+
+
+--------------------------------------------------------
+4. Maximum and Minimum Order Amount
+--------------------------------------------------------
+
+Query:
+
+SELECT MAX(tamount), MIN(tamount) FROM orders;
+
+Output:
+
++--------------+--------------+
+| max(tamount) | min(tamount) |
++--------------+--------------+
+|     1650     |      450     |
++--------------+--------------+
+
+--------------------------------------------------------
+5. Cities with More Than Two Dealers
+--------------------------------------------------------
+
+Query:
+
+SELECT city
+FROM dealers_customer
+GROUP BY city
+HAVING COUNT(delno) > 2;
+
+Output:
+
++---------+
+| city    |
++---------+
+| Chennai |
+| Pune    |
++---------+
+
+--------------------------------------------------------
+6. Revenue by Product Type
+--------------------------------------------------------
+
+Query:
+
+SELECT
+p.ptype,
+SUM(o.tamount) AS totalrevenue
+FROM product p
+JOIN orders o ON p.pno = o.pno
+GROUP BY p.ptype
+ORDER BY totalrevenue DESC;
+
+Output:
+
++-------+--------------+
+| ptype | totalrevenue |
++-------+--------------+
+| Cup   | 11307        |
+| Cone  | 7637         |
+| Box   | 5582         |
++-------+--------------+
